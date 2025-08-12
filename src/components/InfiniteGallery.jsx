@@ -144,6 +144,75 @@ const InfiniteGallery = () => {
     };
   }, [n]);
 
+  useEffect(() => {
+    // Apply styles to document elements for scroll-driven animation
+    document.documentElement.style.scrollbarWidth = 'none';
+    document.documentElement.style.height = `${n * 100}%`;
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.height = '100vh';
+    document.body.style.height = '100dvh';
+    document.body.style.color = '#dedede';
+    document.body.style.font = 'clamp(.625em, 3vmin, 1.5em) / 1.25 "Saira", sans-serif';
+    document.body.style.animation = 'k 1s linear';
+    document.body.style.animationTimeline = 'scroll()';
+    document.body.style.setProperty('--dir', '0');
+    
+    // Add grain background
+    document.body.style.position = 'relative';
+    const beforeStyle = document.createElement('style');
+    beforeStyle.textContent = `
+      body::before {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: #000;
+        filter: url(#grain);
+        content: '';
+      }
+      @media (max-aspect-ratio: 2/3) {
+        body { --dir: 1; }
+      }
+      @keyframes k { to { --k: 1; } }
+    `;
+    document.head.appendChild(beforeStyle);
+
+    // Infinite scroll cycling function
+    function f(k) {
+      if (Math.abs(k) > 0.5) {
+        window.scrollTo(0, 0.5 * (k - Math.sign(k) + 1) * (document.documentElement.offsetHeight - window.innerHeight));
+      }
+    }
+
+    // Initialize
+    f(-1);
+
+    // Scroll event listener
+    const handleScroll = () => {
+      const kValue = +getComputedStyle(document.body).getPropertyValue('--k');
+      f(kValue);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      // Cleanup on unmount
+      document.documentElement.style.scrollbarWidth = '';
+      document.documentElement.style.height = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.height = '';
+      document.body.style.color = '';
+      document.body.style.font = '';
+      document.body.style.animation = '';
+      document.body.style.animationTimeline = '';
+      window.removeEventListener('scroll', handleScroll);
+      if (document.head.contains(beforeStyle)) {
+        document.head.removeChild(beforeStyle);
+      }
+    };
+  }, [n]);
+
   return (
     <div className="gallery-container" style={{ '--n': n }}>
       <svg width="0" height="0" aria-hidden="true">

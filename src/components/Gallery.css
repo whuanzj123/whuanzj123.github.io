@@ -18,11 +18,16 @@
 }
 
 .gallery-container {
-	scrollbar-width: none;
-	height: calc(var(--n) * 100%);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	display: grid;
+	grid-template-rows: max-content 1fr max-content;
+	z-index: 1000;
 }
 
-.gallery-container body,
 .gallery-header,
 .scene,
 .assembly,
@@ -31,33 +36,7 @@
 	display: grid;
 }
 
-body {
-	--dir: 0;
-	grid-template-rows: max-content 1fr max-content;
-	position: fixed;
-	width: 100%;
-	height: 100vh;
-	height: 100dvh;
-	color: #dedede;
-	font: clamp(0.625em, 3vmin, 1.5em) / 1.25 'Saira', sans-serif;
-	animation: k 1s linear;
-	animation-timeline: scroll();
-}
 
-body::before {
-	position: absolute;
-	inset: 0;
-	z-index: -1;
-	background: #000;
-	filter: url(#grain);
-	content: '';
-}
-
-@media (max-aspect-ratio: 2/3) {
-	body {
-		--dir: 1;
-	}
-}
 
 @keyframes k {
 	to {
