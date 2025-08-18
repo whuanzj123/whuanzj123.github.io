@@ -4,7 +4,8 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  css: {
-    transformer: 'postcss', // Ensures modern CSS support
+  base: '/', // Since you're using the main github.io domain
+  build: {
+    outDir: 'dist',
   },
 })

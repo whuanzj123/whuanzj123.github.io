@@ -1,3 +1,4 @@
+// InfiniteGallery.jsx
 import React, { useEffect } from 'react';
 import './Gallery.css'; // We'll need to create this CSS file
 
