@@ -1,4 +1,4 @@
-// InfiniteGallery.jsx - Simplified version with 3 static flipping cards
+// InfiniteGallery.jsx - With animated star background
 import React from 'react';
 import './Gallery.css';
 
@@ -44,57 +44,67 @@ const InfiniteGallery = () => {
 
   return (
     <div className="gallery-container">
-      <header className="gallery-header">
-        <h1>Animal Gallery</h1>
-        <strong>Hover or tap cards to flip them</strong>
-        <em>Mobile-friendly flipping cards showcase</em>
-      </header>
+      {/* Animated Star Background */}
+      <div className="stars-background">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+      </div>
 
-      <main className="scene">
-        <section className="assembly">
-          {animalData.map((animal, i) => {
-            const img = animal.photo;
-            const pos = img.pos;
-            const url = `https://images.${base}-${img.code}?h=900`;
-            
-            const style = {
-              '--i': i,
-              '--url': `url(${url})`,
-              ...(pos && { '--pos': pos })
-            };
+      {/* Gallery Content */}
+      <div className="gallery-content">
+        <header className="gallery-header">
+          <h1>Animal Gallery</h1>
+          <strong>Hover or tap cards to flip them</strong>
+          <em>Mobile-friendly flipping cards with parallax stars</em>
+        </header>
 
-            return (
-              <article key={i} className="card" style={style}>
-                <div className="card-inner">
-                  <div className="card-front">
-                    <figure>
-                      <img src={url} alt={img.text} />
-                      <figcaption>
-                        by{' '}
-                        <a
-                          href={`https://${base}s/${img.page}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {img.by}
-                        </a>
-                      </figcaption>
-                    </figure>
+        <main className="scene">
+          <section className="assembly">
+            {animalData.map((animal, i) => {
+              const img = animal.photo;
+              const pos = img.pos;
+              const url = `https://images.${base}-${img.code}?h=900`;
+              
+              const style = {
+                '--i': i,
+                '--url': `url(${url})`,
+                ...(pos && { '--pos': pos })
+              };
+
+              return (
+                <article key={i} className="card" style={style}>
+                  <div className="card-inner">
+                    <div className="card-front">
+                      <figure>
+                        <img src={url} alt={img.text} />
+                        <figcaption>
+                          by{' '}
+                          <a
+                            href={`https://${base}s/${img.page}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {img.by}
+                          </a>
+                        </figcaption>
+                      </figure>
+                    </div>
+                    
+                    <div className="card-back">
+                      <header>
+                        <h2>{animal.common}</h2>
+                        <em>{animal.binomial}</em>
+                        <p className="description">{img.text}</p>
+                      </header>
+                    </div>
                   </div>
-                  
-                  <div className="card-back">
-                    <header>
-                      <h2>{animal.common}</h2>
-                      <em>{animal.binomial}</em>
-                      <p className="description">{img.text}</p>
-                    </header>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </section>
-      </main>
+                </article>
+              );
+            })}
+          </section>
+        </main>
+      </div>
     </div>
   );
 };
