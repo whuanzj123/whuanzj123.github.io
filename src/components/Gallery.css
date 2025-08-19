@@ -1,241 +1,282 @@
-/* Gallery.css */
-@import url('https://fonts.googleapis.com/css2?family=Saira:wght@400;700&family=Caveat:wght@400;700&family=Ubuntu:wght@400;700&family=Ubuntu+Mono:wght@400;700&display=swap');
+/* Gallery.css - Simplified mobile-friendly version */
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@400;700&family=Caveat:wght@400;700&family=Ubuntu:wght@400;700&display=swap');
 
-@property --k {
-	syntax: '<number>';
-	initial-value: -1;
-	inherits: true;
-}
-
-@property --ang {
-	syntax: '<angle>';
-	initial-value: 0deg;
-	inherits: false;
-}
-
+/* Reset and ensure full viewport coverage */
 * { 
-	margin: 0; 
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100% !important;
+	width: 100% !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	overflow-x: hidden;
+}
+
+/* Override any global body styles that might interfere */
+body {
+	display: block !important;
+	place-items: unset !important;
+	min-height: unset !important;
+}
+
+#root {
+	height: 100vh;
+	width: 100vw;
 }
 
 .gallery-container {
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 100%;
+	width: 100vw;
 	height: 100vh;
-	display: grid;
-	grid-template-rows: max-content 1fr max-content;
+	background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+	color: #dedede;
+	font-family: 'Saira', sans-serif;
+	padding: 2rem 1rem;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
 	z-index: 1000;
 }
 
-.gallery-header,
-.scene,
-.assembly,
-.assembly article,
-.assembly figure {
-	display: grid;
-}
-
-
-
-@keyframes k {
-	to {
-		--k: 1;
-	}
-}
-
-svg[height='0'][aria-hidden='true'] {
-	position: fixed;
-}
-
 .gallery-header {
-	place-content: center;
-	place-items: center;
-	padding: 0.5em;
 	text-align: center;
-	text-wrap: balance;
+	margin-bottom: 3rem;
+	padding: 1rem;
+}
+
+.gallery-header h1 {
+	font-size: clamp(2rem, 5vw, 3.5rem);
+	margin-bottom: 0.5rem;
+	background: linear-gradient(45deg, #f48c06, #dc3055);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.gallery-header strong {
+	display: block;
+	font-size: 1.2rem;
+	margin-bottom: 1rem;
+	color: #f48c06;
 }
 
 .gallery-header em {
-	max-width: 32em;
+	font-size: 1rem;
+	color: #999;
+	font-style: normal;
 }
 
 .scene {
-	overflow: hidden;
-	perspective: 50em;
-}
-
-.assembly,
-.assembly article {
-	transform-style: preserve-3d;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	perspective: 1000px;
+	flex: 1;
+	padding: 1rem 0;
 }
 
 .assembly {
-	--r: calc(2 + var(--dir)) / 3;
-	--w: clamp(4em, min(50vh, 25vw), 18em);
-	--z: calc(var(--f, 1.25) * -0.5 * var(--w) / tan(0.5turn / var(--n)));
-	place-self: center;
-	translate: 0 0 var(--z);
-	rotate: var(--dir) calc(1 - var(--dir)) 0 calc((var(--k) + 0.5) * -1turn);
+	display: flex;
+	gap: 2rem;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	max-width: 100%;
+	width: 100%;
 }
 
-.assembly article,
-.assembly article header,
-.assembly figure,
-.assembly img,
-.assembly figcaption {
-	grid-area: 1 / 1;
-}
-
-.assembly article {
-	/* item progress value */
-	--j: var(--i) / var(--n);
-	/* linear difference between this item's progress value  
-	 * and progress value of highlighted item in front - 
-	 * it's a value in the [0, 1] interval */
-	--dif-lin: calc(var(--j) - mod(var(--k) + 1, 1));
-	/* absolute value of linear difference */
-	--abs-lin: abs(var(--dif-lin));
-	/* difference between middle & absolute linear difference */
-	--dif-mid: calc(0.5 - var(--abs-lin));
-	--abs-mid: abs(var(--dif-mid));
-	/* relative distance to from this item 
-	 * to highlighted one in front */
-	--dif-arc: calc(2 * (0.5 - var(--abs-mid)));
-	/* relative distance limit */
-	--lim: 0.35;
-	--sel: max(0, calc((var(--lim) - var(--dif-arc)) / var(--lim)));
-	--out: calc(1 - var(--sel));
-	--hov: 0;
-	width: var(--w);
-	aspect-ratio: var(--r);
-	transform: rotate3d(var(--dir), calc(1 - var(--dir)), 0, calc(var(--j) * 1turn))
-		translatez(var(--z)) rotate(calc(var(--dir) * 0.5turn));
-}
-
-.assembly article header {
-	rotate: y calc((1 + var(--hov)) * 0.5turn);
-}
-
-.assembly article:hover,
-.assembly article:focus-within {
-	--hov: round(var(--sel));
-}
-
-/* Fallback for browsers that don't support abs() */
-@supports not (scale: abs(-1)) {
-	.assembly article {
-		--abs-lin: max(var(--dif-lin), calc(-1 * var(--dif-lin)));
-		--abs-mid: max(var(--dif-mid), calc(-1 * var(--dif-mid)));
-	}
-}
-
-.assembly article header,
-.assembly figure {
-	--ang: calc(-45deg + var(--hov) * 180deg);
-	overflow: hidden;
+/* Card container */
+.card {
+	width: 500px;
+	height: 700px;
 	position: relative;
-	border: solid 4px transparent;
-	border-radius: 0.5em;
-	backface-visibility: hidden;
-	box-shadow: 5px 5px 13px #000;
-	background: var(--url) 50% / cover padding-box, linear-gradient(#666 0 0) padding-box,
-		repeating-conic-gradient(
-			from var(--ang),
-			transparent 0% 15%,
-			color-mix(in srgb, #f48c06 calc(var(--sel) * 100%), #333) 20% 30%,
-			transparent 35% 50%
-		)
-		border-box #121212;
-	background-blend-mode: multiply, normal, normal;
-	isolation: isolate;
-	/* prevent edge glitching on article hover */
-	pointer-events: none;
-	transition: 0.35s ease-out;
-	transition-property: rotate, --ang;
+	cursor: pointer;
+	perspective: 1000px;
 }
 
-.assembly article header::after,
-.assembly figure::after {
-	position: absolute;
-	inset: 0;
-	opacity: var(--out);
-	background: #03071e;
-	mix-blend-mode: color;
-	pointer-events: none;
-	content: '';
-}
-
-/* reverse from parent */
-.assembly h2,
-.assembly em,
-.assembly img,
-.assembly a {
-	pointer-events: auto;
-}
-
-.assembly h2,
-.assembly em,
-.assembly figcaption {
-	opacity: round(up, var(--sel));
-	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
-}
-
-.assembly h2 {
-	font-size: 1.125em;
-}
-
-.assembly figure {
-	rotate: y calc(var(--hov) * 0.5turn);
-}
-
-.assembly img {
+/* Card inner container for flip effect */
+.card-inner {
+	position: relative;
 	width: 100%;
 	height: 100%;
-	aspect-ratio: var(--r);
+	text-align: center;
+	transition: transform 0.6s ease-in-out;
+	transform-style: preserve-3d;
+}
+
+/* Hover/focus effect for flipping */
+.card:hover .card-inner,
+.card:focus-within .card-inner {
+	transform: rotateY(180deg);
+}
+
+/* Front and back faces */
+.card-front,
+.card-back {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
+	border-radius: 15px;
+	overflow: hidden;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+	border: 2px solid #333;
+}
+
+/* Front face (image) */
+.card-front {
+	background: #000;
+}
+
+.card-front figure {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+.card-front img {
+	width: 100%;
+	height: 100%;
 	object-fit: cover;
-	object-position: var(--pos);
+	object-position: var(--pos, center);
+	transition: transform 0.3s ease;
 }
 
-.assembly figcaption {
-	align-self: end;
-	padding: 0.5em;
-	background: rgba(255, 255, 255, 0.2);
-	color: #040404;
-	font: max(0.75rem, 0.75em) 'Caveat', cursive;
-	text-align: right;
-	backdrop-filter: blur(5px) brightness(1.5);
+.card:hover .card-front img {
+	transform: scale(1.05);
 }
 
-.assembly figcaption a {
-	color: #370617;
-}
-
-/* just support info boxes if it lacks support */
-aside {
-	position: fixed;
+.card-front figcaption {
+	position: absolute;
 	bottom: 0;
-	padding: 0.5em;
-}
-
-.box-info-scrollani {
-	margin: 0.5em;
-	border-left: solid 5px #dc3055;
-	padding: 0.75em;
-	box-shadow: 2px 2px 5px hsla(0, 0%, 0%, 0.35);
-	background: #851d40;
+	left: 0;
+	right: 0;
+	padding: 1rem;
+	background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
 	color: #fff;
-	font: 1em / 1.25 'Ubuntu', 'Trebuchet MS', Arial, sans-serif;
+	font-family: 'Caveat', cursive;
+	font-size: 1.1rem;
+	text-align: right;
 }
 
-@supports (animation-timeline: scroll()) {
-	.box-info-scrollani {
-		display: none;
+.card-front figcaption a {
+	color: #f48c06;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.card-front figcaption a:hover {
+	text-decoration: underline;
+}
+
+/* Back face (information) */
+.card-back {
+	background: linear-gradient(135deg, #2d1b35 0%, #1a1a2e 100%);
+	transform: rotateY(180deg);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 2rem;
+	text-align: center;
+}
+
+.card-back h2 {
+	font-size: 2rem;
+	margin-bottom: 0.5rem;
+	color: #f48c06;
+	font-weight: 700;
+}
+
+.card-back em {
+	font-size: 1.2rem;
+	color: #dc3055;
+	font-style: italic;
+	margin-bottom: 1.5rem;
+	display: block;
+}
+
+.card-back .description {
+	font-size: 1rem;
+	line-height: 1.6;
+	color: #ccc;
+	max-width: 250px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 1200px) {
+	.assembly {
+		gap: 1.5rem;
+	}
+	
+	.card {
+		width: 400px;
+		height: 560px;
 	}
 }
 
-kbd {
-	padding: 2px;
-	background: hsla(0, 0%, 0%, 0.35);
-	font: 1.1em / 1.2 'Ubuntu Mono', 'Consolas', 'Monaco', monospace;
+@media (max-width: 768px) {
+	.gallery-container {
+		padding: 1rem 0.5rem;
+	}
+	
+	.assembly {
+		gap: 1.5rem;
+		padding: 0 1rem;
+	}
+	
+	.card {
+		width: 300px;
+		height: 420px;
+	}
+	
+	.gallery-header {
+		margin-bottom: 2rem;
+	}
+	
+	.gallery-header h1 {
+		font-size: 2.5rem;
+	}
+	
+	.gallery-header strong {
+		font-size: 1.1rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.assembly {
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	.card {
+		width: 280px;
+		height: 390px;
+	}
+	
+	.card-back {
+		padding: 1.5rem;
+	}
+	
+	.card-back h2 {
+		font-size: 1.8rem;
+	}
+	
+	.card-back em {
+		font-size: 1.1rem;
+	}
+}
+
+/* Touch-friendly hover for mobile */
+@media (hover: none) and (pointer: coarse) {
+	.card:active .card-inner {
+		transform: rotateY(180deg);
+	}
 }
