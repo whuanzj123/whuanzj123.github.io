@@ -1,0 +1,47 @@
+// FlippingCard.jsx - Reusable flipping card component
+import React from 'react';
+import './FlippingCard.css';
+
+const FlippingCard = ({ animal, index, baseUrl }) => {
+  const img = animal.photo;
+  const pos = img.pos;
+  const url = `https://images.${baseUrl}-${img.code}?h=900`;
+  
+  const style = {
+    '--i': index,
+    '--url': `url(${url})`,
+    ...(pos && { '--pos': pos })
+  };
+
+  return (
+    <article className="card" style={style}>
+      <div className="card-inner">
+        <div className="card-front">
+          <figure>
+            <img src={url} alt={img.text} />
+            <figcaption>
+              by{' '}
+              <a
+                href={`https://${baseUrl}s/${img.page}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {img.by}
+              </a>
+            </figcaption>
+          </figure>
+        </div>
+        
+        <div className="card-back">
+          <header>
+            <h2>{animal.common}</h2>
+            <em>{animal.binomial}</em>
+            <p className="description">{img.text}</p>
+          </header>
+        </div>
+      </div>
+    </article>
+  );
+};
+
+export default FlippingCard;

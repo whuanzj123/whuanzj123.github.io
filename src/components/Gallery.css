@@ -1,4 +1,4 @@
-/* Gallery.css - With animated star background */
+/* Gallery.css - Gallery layout and container styles with star controls */
 @import url('https://fonts.googleapis.com/css2?family=Saira:wght@400;700&family=Caveat:wght@400;700&family=Ubuntu:wght@400;700&family=Lato:wght@300;400;700&display=swap');
 
 /* Reset and ensure full viewport coverage */
@@ -39,166 +39,6 @@ body {
 	font-family: 'Saira', sans-serif;
 	overflow: hidden;
 	z-index: 1000;
-}
-
-/* ===== ANIMATED STAR BACKGROUND ===== */
-.stars-background {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	pointer-events: none;
-	z-index: 1;
-}
-
-/* Small stars layer */
-#stars {
-	width: 1px;
-	height: 1px;
-	background: transparent;
-	box-shadow: 
-		1847px 1543px #FFF, 1284px 1732px #FFF, 783px 234px #FFF, 1123px 1876px #FFF,
-		1748px 643px #FFF, 234px 1543px #FFF, 1643px 1234px #FFF, 876px 743px #FFF,
-		543px 1876px #FFF, 1234px 234px #FFF, 876px 1543px #FFF, 1543px 876px #FFF,
-		234px 1732px #FFF, 1876px 543px #FFF, 643px 1234px #FFF, 1732px 876px #FFF,
-		1234px 1643px #FFF, 876px 234px #FFF, 543px 1543px #FFF, 1643px 1732px #FFF,
-		1876px 1234px #FFF, 234px 643px #FFF, 1543px 876px #FFF, 876px 1876px #FFF,
-		1732px 543px #FFF, 643px 1643px #FFF, 1234px 234px #FFF, 1876px 1543px #FFF,
-		543px 1732px #FFF, 1643px 876px #FFF, 234px 1234px #FFF, 876px 643px #FFF,
-		1543px 1876px #FFF, 1732px 234px #FFF, 643px 1543px #FFF, 1234px 876px #FFF,
-		1876px 1732px #FFF, 543px 1643px #FFF, 234px 234px #FFF, 1643px 1234px #FFF,
-		876px 1876px #FFF, 1543px 643px #FFF, 1732px 1543px #FFF, 643px 876px #FFF,
-		1234px 1732px #FFF, 1876px 1643px #FFF, 543px 234px #FFF, 234px 1234px #FFF,
-		1643px 876px #FFF, 876px 1543px #FFF, 1543px 1732px #FFF, 1732px 1876px #FFF,
-		643px 234px #FFF, 1234px 643px #FFF, 1876px 1234px #FFF, 543px 1543px #FFF,
-		234px 876px #FFF, 1643px 1732px #FFF, 876px 1876px #FFF, 1543px 234px #FFF,
-		1732px 1643px #FFF, 643px 1234px #FFF, 1234px 876px #FFF, 1876px 1543px #FFF,
-		543px 1732px #FFF, 234px 1876px #FFF, 1643px 234px #FFF, 876px 1234px #FFF,
-		1543px 643px #FFF, 1732px 876px #FFF, 643px 1543px #FFF, 1234px 1732px #FFF,
-		1876px 1876px #FFF, 543px 643px #FFF, 234px 1234px #FFF, 1643px 876px #FFF;
-	animation: animStar 50s linear infinite;
-}
-
-#stars:after {
-	content: " ";
-	position: absolute;
-	top: 2000px;
-	width: 1px;
-	height: 1px;
-	background: transparent;
-	box-shadow: 
-		1847px 1543px #FFF, 1284px 1732px #FFF, 783px 234px #FFF, 1123px 1876px #FFF,
-		1748px 643px #FFF, 234px 1543px #FFF, 1643px 1234px #FFF, 876px 743px #FFF,
-		543px 1876px #FFF, 1234px 234px #FFF, 876px 1543px #FFF, 1543px 876px #FFF,
-		234px 1732px #FFF, 1876px 543px #FFF, 643px 1234px #FFF, 1732px 876px #FFF,
-		1234px 1643px #FFF, 876px 234px #FFF, 543px 1543px #FFF, 1643px 1732px #FFF,
-		1876px 1234px #FFF, 234px 643px #FFF, 1543px 876px #FFF, 876px 1876px #FFF,
-		1732px 543px #FFF, 643px 1643px #FFF, 1234px 234px #FFF, 1876px 1543px #FFF,
-		543px 1732px #FFF, 1643px 876px #FFF, 234px 1234px #FFF, 876px 643px #FFF,
-		1543px 1876px #FFF, 1732px 234px #FFF, 643px 1543px #FFF, 1234px 876px #FFF,
-		1876px 1732px #FFF, 543px 1643px #FFF, 234px 234px #FFF, 1643px 1234px #FFF,
-		876px 1876px #FFF, 1543px 643px #FFF, 1732px 1543px #FFF, 643px 876px #FFF,
-		1234px 1732px #FFF, 1876px 1643px #FFF, 543px 234px #FFF, 234px 1234px #FFF,
-		1643px 876px #FFF, 876px 1543px #FFF, 1543px 1732px #FFF, 1732px 1876px #FFF,
-		643px 234px #FFF, 1234px 643px #FFF, 1876px 1234px #FFF, 543px 1543px #FFF,
-		234px 876px #FFF, 1643px 1732px #FFF, 876px 1876px #FFF, 1543px 234px #FFF,
-		1732px 1643px #FFF, 643px 1234px #FFF, 1234px 876px #FFF, 1876px 1543px #FFF,
-		543px 1732px #FFF, 234px 1876px #FFF, 1643px 234px #FFF, 876px 1234px #FFF,
-		1543px 643px #FFF, 1732px 876px #FFF, 643px 1543px #FFF, 1234px 1732px #FFF,
-		1876px 1876px #FFF, 543px 643px #FFF, 234px 1234px #FFF, 1643px 876px #FFF;
-}
-
-/* Medium stars layer */
-#stars2 {
-	width: 2px;
-	height: 2px;
-	background: transparent;
-	box-shadow: 
-		1323px 987px #FFF, 654px 1654px #FFF, 1876px 234px #FFF, 543px 1234px #FFF,
-		1234px 876px #FFF, 876px 1543px #FFF, 234px 643px #FFF, 1643px 1876px #FFF,
-		1732px 543px #FFF, 643px 1234px #FFF, 1543px 876px #FFF, 876px 234px #FFF,
-		234px 1643px #FFF, 1876px 1732px #FFF, 543px 643px #FFF, 1234px 1543px #FFF,
-		1643px 876px #FFF, 876px 1876px #FFF, 1732px 234px #FFF, 643px 1234px #FFF,
-		1543px 1732px #FFF, 234px 543px #FFF, 1876px 1643px #FFF, 543px 876px #FFF,
-		1234px 234px #FFF, 1643px 1543px #FFF, 876px 1732px #FFF, 1732px 1876px #FFF,
-		643px 234px #FFF, 1543px 643px #FFF, 234px 1234px #FFF, 1876px 876px #FFF,
-		543px 1543px #FFF, 1234px 1732px #FFF, 1643px 234px #FFF, 876px 1643px #FFF,
-		1732px 543px #FFF, 643px 1876px #FFF, 1543px 234px #FFF, 234px 876px #FFF,
-		1876px 1234px #FFF, 543px 1732px #FFF, 1234px 643px #FFF, 1643px 1543px #FFF,
-		876px 234px #FFF, 1732px 1876px #FFF, 643px 543px #FFF, 1543px 1234px #FFF,
-		234px 1732px #FFF, 1876px 643px #FFF, 543px 234px #FFF, 1234px 1876px #FFF;
-	animation: animStar 100s linear infinite;
-}
-
-#stars2:after {
-	content: " ";
-	position: absolute;
-	top: 2000px;
-	width: 2px;
-	height: 2px;
-	background: transparent;
-	box-shadow: 
-		1323px 987px #FFF, 654px 1654px #FFF, 1876px 234px #FFF, 543px 1234px #FFF,
-		1234px 876px #FFF, 876px 1543px #FFF, 234px 643px #FFF, 1643px 1876px #FFF,
-		1732px 543px #FFF, 643px 1234px #FFF, 1543px 876px #FFF, 876px 234px #FFF,
-		234px 1643px #FFF, 1876px 1732px #FFF, 543px 643px #FFF, 1234px 1543px #FFF,
-		1643px 876px #FFF, 876px 1876px #FFF, 1732px 234px #FFF, 643px 1234px #FFF,
-		1543px 1732px #FFF, 234px 543px #FFF, 1876px 1643px #FFF, 543px 876px #FFF,
-		1234px 234px #FFF, 1643px 1543px #FFF, 876px 1732px #FFF, 1732px 1876px #FFF,
-		643px 234px #FFF, 1543px 643px #FFF, 234px 1234px #FFF, 1876px 876px #FFF,
-		543px 1543px #FFF, 1234px 1732px #FFF, 1643px 234px #FFF, 876px 1643px #FFF,
-		1732px 543px #FFF, 643px 1876px #FFF, 1543px 234px #FFF, 234px 876px #FFF,
-		1876px 1234px #FFF, 543px 1732px #FFF, 1234px 643px #FFF, 1643px 1543px #FFF,
-		876px 234px #FFF, 1732px 1876px #FFF, 643px 543px #FFF, 1543px 1234px #FFF,
-		234px 1732px #FFF, 1876px 643px #FFF, 543px 234px #FFF, 1234px 1876px #FFF;
-}
-
-/* Large stars layer */
-#stars3 {
-	width: 3px;
-	height: 3px;
-	background: transparent;
-	box-shadow: 
-		1543px 876px #FFF, 876px 1234px #FFF, 234px 1732px #FFF, 1876px 543px #FFF,
-		643px 1643px #FFF, 1234px 234px #FFF, 1732px 1876px #FFF, 543px 643px #FFF,
-		234px 1543px #FFF, 1643px 876px #FFF, 876px 1732px #FFF, 1543px 234px #FFF,
-		1876px 1643px #FFF, 643px 1234px #FFF, 1234px 543px #FFF, 1732px 876px #FFF,
-		543px 1876px #FFF, 234px 643px #FFF, 1643px 1543px #FFF, 876px 234px #FFF,
-		1543px 1732px #FFF, 1876px 876px #FFF, 643px 543px #FFF, 1234px 1643px #FFF,
-		1732px 234px #FFF, 543px 1234px #FFF, 234px 1876px #FFF, 1643px 643px #FFF,
-		876px 1543px #FFF, 1543px 543px #FFF, 1876px 1732px #FFF, 643px 234px #FFF,
-		1234px 1876px #FFF, 1732px 643px #FFF, 543px 1543px #FFF, 234px 234px #FFF;
-	animation: animStar 150s linear infinite;
-}
-
-#stars3:after {
-	content: " ";
-	position: absolute;
-	top: 2000px;
-	width: 3px;
-	height: 3px;
-	background: transparent;
-	box-shadow: 
-		1543px 876px #FFF, 876px 1234px #FFF, 234px 1732px #FFF, 1876px 543px #FFF,
-		643px 1643px #FFF, 1234px 234px #FFF, 1732px 1876px #FFF, 543px 643px #FFF,
-		234px 1543px #FFF, 1643px 876px #FFF, 876px 1732px #FFF, 1543px 234px #FFF,
-		1876px 1643px #FFF, 643px 1234px #FFF, 1234px 543px #FFF, 1732px 876px #FFF,
-		543px 1876px #FFF, 234px 643px #FFF, 1643px 1543px #FFF, 876px 234px #FFF,
-		1543px 1732px #FFF, 1876px 876px #FFF, 643px 543px #FFF, 1234px 1643px #FFF,
-		1732px 234px #FFF, 543px 1234px #FFF, 234px 1876px #FFF, 1643px 643px #FFF,
-		876px 1543px #FFF, 1543px 543px #FFF, 1876px 1732px #FFF, 643px 234px #FFF,
-		1234px 1876px #FFF, 1732px 643px #FFF, 543px 1543px #FFF, 234px 234px #FFF;
-}
-
-/* Star animation */
-@keyframes animStar {
-	from {
-		transform: translateY(0px);
-	}
-	to {
-		transform: translateY(-2000px);
-	}
 }
 
 /* ===== GALLERY CONTENT ===== */
@@ -243,6 +83,66 @@ body {
 	font-size: 1rem;
 	color: #999;
 	font-style: normal;
+	margin-bottom: 1.5rem;
+	display: block;
+}
+
+/* ===== STAR CONTROLS ===== */
+.star-controls {
+	margin-top: 1.5rem;
+	padding: 1rem;
+	background: rgba(26, 26, 46, 0.3);
+	border-radius: 12px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(5px);
+}
+
+.star-controls p {
+	margin-bottom: 1rem;
+	color: #ccc;
+	font-size: 1rem;
+	font-weight: 500;
+}
+
+.preset-buttons {
+	display: flex;
+	gap: 0.8rem;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.preset-btn {
+	padding: 0.6rem 1.2rem;
+	background: rgba(45, 27, 53, 0.6);
+	border: 2px solid rgba(255, 255, 255, 0.2);
+	border-radius: 25px;
+	color: #dedede;
+	font-family: 'Saira', sans-serif;
+	font-size: 0.9rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	backdrop-filter: blur(3px);
+}
+
+.preset-btn:hover {
+	background: rgba(244, 140, 6, 0.2);
+	border-color: #f48c06;
+	color: #f48c06;
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(244, 140, 6, 0.2);
+}
+
+.preset-btn.active {
+	background: linear-gradient(45deg, rgba(244, 140, 6, 0.3), rgba(220, 48, 85, 0.3));
+	border-color: #f48c06;
+	color: #f48c06;
+	box-shadow: 0 0 20px rgba(244, 140, 6, 0.3);
+	font-weight: 700;
+}
+
+.preset-btn:active {
+	transform: translateY(0);
 }
 
 .scene {
@@ -266,135 +166,10 @@ body {
 	width: 100%;
 }
 
-/* Card container */
-.card {
-	width: 500px;
-	height: 700px;
-	position: relative;
-	cursor: pointer;
-	perspective: 1000px;
-}
-
-/* Card inner container for flip effect */
-.card-inner {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	text-align: center;
-	transition: transform 0.6s ease-in-out;
-	transform-style: preserve-3d;
-}
-
-/* Hover/focus effect for flipping */
-.card:hover .card-inner,
-.card:focus-within .card-inner {
-	transform: rotateY(180deg);
-}
-
-/* Front and back faces */
-.card-front,
-.card-back {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	backface-visibility: hidden;
-	border-radius: 15px;
-	overflow: hidden;
-	box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-	border: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Front face (image) */
-.card-front {
-	background: #000;
-}
-
-.card-front figure {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	margin: 0;
-}
-
-.card-front img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	object-position: var(--pos, center);
-	transition: transform 0.3s ease;
-}
-
-.card:hover .card-front img {
-	transform: scale(1.05);
-}
-
-.card-front figcaption {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	padding: 1rem;
-	background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-	color: #fff;
-	font-family: 'Caveat', cursive;
-	font-size: 1.1rem;
-	text-align: right;
-}
-
-.card-front figcaption a {
-	color: #f48c06;
-	text-decoration: none;
-	font-weight: bold;
-}
-
-.card-front figcaption a:hover {
-	text-decoration: underline;
-}
-
-/* Back face (information) */
-.card-back {
-	background: linear-gradient(135deg, rgba(45, 27, 53, 0.9) 0%, rgba(26, 26, 46, 0.9) 100%);
-	transform: rotateY(180deg);
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding: 2rem;
-	text-align: center;
-}
-
-.card-back h2 {
-	font-size: 2rem;
-	margin-bottom: 0.5rem;
-	color: #f48c06;
-	font-weight: 700;
-	text-shadow: 0 0 15px rgba(244, 140, 6, 0.3);
-}
-
-.card-back em {
-	font-size: 1.2rem;
-	color: #dc3055;
-	font-style: italic;
-	margin-bottom: 1.5rem;
-	display: block;
-}
-
-.card-back .description {
-	font-size: 1rem;
-	line-height: 1.6;
-	color: #ccc;
-	max-width: 250px;
-}
-
-/* Mobile responsiveness */
+/* Mobile responsiveness for gallery layout */
 @media (max-width: 1200px) {
 	.assembly {
 		gap: 1.5rem;
-	}
-	
-	.card {
-		width: 400px;
-		height: 560px;
 	}
 }
 
@@ -408,11 +183,6 @@ body {
 		padding: 0 1rem;
 	}
 	
-	.card {
-		width: 300px;
-		height: 420px;
-	}
-	
 	.gallery-header {
 		margin-bottom: 2rem;
 	}
@@ -424,6 +194,15 @@ body {
 	.gallery-header strong {
 		font-size: 1.1rem;
 	}
+
+	.preset-buttons {
+		gap: 0.5rem;
+	}
+
+	.preset-btn {
+		padding: 0.5rem 1rem;
+		font-size: 0.8rem;
+	}
 }
 
 @media (max-width: 480px) {
@@ -431,28 +210,18 @@ body {
 		flex-direction: column;
 		align-items: center;
 	}
-	
-	.card {
-		width: 280px;
-		height: 390px;
-	}
-	
-	.card-back {
-		padding: 1.5rem;
-	}
-	
-	.card-back h2 {
-		font-size: 1.8rem;
-	}
-	
-	.card-back em {
-		font-size: 1.1rem;
-	}
-}
 
-/* Touch-friendly hover for mobile */
-@media (hover: none) and (pointer: coarse) {
-	.card:active .card-inner {
-		transform: rotateY(180deg);
+	.star-controls {
+		margin-top: 1rem;
+		padding: 0.8rem;
+	}
+
+	.preset-buttons {
+		gap: 0.4rem;
+	}
+
+	.preset-btn {
+		padding: 0.4rem 0.8rem;
+		font-size: 0.75rem;
 	}
 }

@@ -1,5 +1,8 @@
-// InfiniteGallery.jsx - With animated star background
-import React from 'react';
+// InfiniteGallery.jsx - Main gallery with configurable star background and music
+import React, { useState } from 'react';
+import StarBackground from './StarBackground';
+import FlippingCard from './FlippingCard';
+import BackgroundMusic from './BackgroundMusic';
 import './Gallery.css';
 
 // Reduced to only 3 animals for the static display
@@ -39,69 +42,95 @@ const animalData = [
   }
 ];
 
+// Preset configurations for the star background
+const starPresets = {
+  default: {
+    speed: 'normal',
+    color: '#FFFFFF',
+    density: 'normal',
+    opacity: 1,
+    size: 'normal'
+  },
+  dreamy: {
+    speed: 'slow',
+    color: '#E6B3FF',
+    density: 'low',
+    opacity: 0.7,
+    size: 'large'
+  },
+  energetic: {
+    speed: 'fast',
+    color: '#FFD700',
+    density: 'high',
+    opacity: 0.9,
+    size: 'small'
+  },
+  cosmic: {
+    speed: { small: 40, medium: 80, large: 120 },
+    color: '#00FFFF',
+    density: 'high',
+    opacity: 0.8,
+    size: 'normal'
+  },
+  subtle: {
+    speed: 'slow',
+    color: '#CCCCCC',
+    density: 'low',
+    opacity: 0.3,
+    size: 'small'
+  }
+};
+
 const InfiniteGallery = () => {
   const base = 'unsplash.com/photo';
+  const [currentPreset, setCurrentPreset] = useState('default');
+
+  const handlePresetChange = (presetName) => {
+    setCurrentPreset(presetName);
+  };
 
   return (
     <div className="gallery-container">
-      {/* Animated Star Background */}
-      <div className="stars-background">
-        <div id="stars"></div>
-        <div id="stars2"></div>
-        <div id="stars3"></div>
-      </div>
+      {/* Configurable Star Background */}
+      <StarBackground {...starPresets[currentPreset]} />
+
+      {/* Background Music Player */}
+      <BackgroundMusic />
 
       {/* Gallery Content */}
       <div className="gallery-content">
         <header className="gallery-header">
           <h1>Animal Gallery</h1>
           <strong>Hover or tap cards to flip them</strong>
-          <em>Mobile-friendly flipping cards with parallax stars</em>
+          <em>Mobile-friendly flipping cards with configurable parallax stars and epic soundtrack</em>
+          
+          {/* Star Background Controls */}
+          <div className="star-controls">
+            <p>Star Background Theme:</p>
+            <div className="preset-buttons">
+              {Object.keys(starPresets).map((presetName) => (
+                <button
+                  key={presetName}
+                  className={`preset-btn ${currentPreset === presetName ? 'active' : ''}`}
+                  onClick={() => handlePresetChange(presetName)}
+                >
+                  {presetName.charAt(0).toUpperCase() + presetName.slice(1)}
+                </button>
+              ))}
+            </div>
+          </div>
         </header>
 
         <main className="scene">
           <section className="assembly">
-            {animalData.map((animal, i) => {
-              const img = animal.photo;
-              const pos = img.pos;
-              const url = `https://images.${base}-${img.code}?h=900`;
-              
-              const style = {
-                '--i': i,
-                '--url': `url(${url})`,
-                ...(pos && { '--pos': pos })
-              };
-
-              return (
-                <article key={i} className="card" style={style}>
-                  <div className="card-inner">
-                    <div className="card-front">
-                      <figure>
-                        <img src={url} alt={img.text} />
-                        <figcaption>
-                          by{' '}
-                          <a
-                            href={`https://${base}s/${img.page}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {img.by}
-                          </a>
-                        </figcaption>
-                      </figure>
-                    </div>
-                    
-                    <div className="card-back">
-                      <header>
-                        <h2>{animal.common}</h2>
-                        <em>{animal.binomial}</em>
-                        <p className="description">{img.text}</p>
-                      </header>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
+            {animalData.map((animal, index) => (
+              <FlippingCard
+                key={index}
+                animal={animal}
+                index={index}
+                baseUrl={base}
+              />
+            ))}
           </section>
         </main>
       </div>
