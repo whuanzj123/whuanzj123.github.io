@@ -3,9 +3,9 @@ import React from 'react';
 import './StarBackground.css';
 
 const StarBackground = ({ 
-  speed = 'normal',           // 'slow', 'normal', 'fast', or custom object
+  speed = 'fast',           // 'slow', 'normal', 'fast', or custom object
   color = '#FFFFFF',          // Star color
-  density = 'normal',         // 'low', 'normal', 'high'
+  density = 'high',         // 'low', 'normal', 'high'
   opacity = 1,                // Overall opacity (0-1)
   size = 'normal'             // 'small', 'normal', 'large'
 }) => {
@@ -30,9 +30,9 @@ const StarBackground = ({
 
   // Density configurations
   const densityConfigs = {
-    low: { small: 30, medium: 20, large: 15 },
-    normal: { small: 70, medium: 40, large: 30 },
-    high: { small: 120, medium: 80, large: 50 }
+    low: { small: 60, medium: 40, large: 30 },
+    normal: { small: 140, medium: 80, large: 60 },
+    high: { small: 240, medium: 160, large: 100 }
   };
   const densityConfig = densityConfigs[density] || densityConfigs.normal;
 
