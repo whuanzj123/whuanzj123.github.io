@@ -1,4 +1,4 @@
-/* StarBackground.css - Configurable animated star background styles */
+/* StarBackground.css - Fixed version with dynamic screen coverage */
 
 /* ===== ANIMATED STAR BACKGROUND ===== */
 .stars-background {
@@ -10,159 +10,89 @@
 	pointer-events: none;
 	z-index: 1;
 	opacity: var(--star-opacity, 1);
+	overflow: hidden; /* Ensure stars don't cause scrollbars */
 }
 
-/* Small stars layer - now configurable */
+/* Small stars layer - now fully dynamic */
 #stars {
 	width: var(--small-star-size, 1px);
 	height: var(--small-star-size, 1px);
 	background: transparent;
-	box-shadow: var(--small-star-shadow, 
-		1847px 1543px var(--star-color, #FFF), 1284px 1732px var(--star-color, #FFF), 783px 234px var(--star-color, #FFF), 1123px 1876px var(--star-color, #FFF),
-		1748px 643px var(--star-color, #FFF), 234px 1543px var(--star-color, #FFF), 1643px 1234px var(--star-color, #FFF), 876px 743px var(--star-color, #FFF),
-		543px 1876px var(--star-color, #FFF), 1234px 234px var(--star-color, #FFF), 876px 1543px var(--star-color, #FFF), 1543px 876px var(--star-color, #FFF),
-		234px 1732px var(--star-color, #FFF), 1876px 543px var(--star-color, #FFF), 643px 1234px var(--star-color, #FFF), 1732px 876px var(--star-color, #FFF),
-		1234px 1643px var(--star-color, #FFF), 876px 234px var(--star-color, #FFF), 543px 1543px var(--star-color, #FFF), 1643px 1732px var(--star-color, #FFF),
-		1876px 1234px var(--star-color, #FFF), 234px 643px var(--star-color, #FFF), 1543px 876px var(--star-color, #FFF), 876px 1876px var(--star-color, #FFF),
-		1732px 543px var(--star-color, #FFF), 643px 1643px var(--star-color, #FFF), 1234px 234px var(--star-color, #FFF), 1876px 1543px var(--star-color, #FFF),
-		543px 1732px var(--star-color, #FFF), 1643px 876px var(--star-color, #FFF), 234px 1234px var(--star-color, #FFF), 876px 643px var(--star-color, #FFF),
-		1543px 1876px var(--star-color, #FFF), 1732px 234px var(--star-color, #FFF), 643px 1543px var(--star-color, #FFF), 1234px 876px var(--star-color, #FFF),
-		1876px 1732px var(--star-color, #FFF), 543px 1643px var(--star-color, #FFF), 234px 234px var(--star-color, #FFF), 1643px 1234px var(--star-color, #FFF),
-		876px 1876px var(--star-color, #FFF), 1543px 643px var(--star-color, #FFF), 1732px 1543px var(--star-color, #FFF), 643px 876px var(--star-color, #FFF),
-		1234px 1732px var(--star-color, #FFF), 1876px 1643px var(--star-color, #FFF), 543px 234px var(--star-color, #FFF), 234px 1234px var(--star-color, #FFF),
-		1643px 876px var(--star-color, #FFF), 876px 1543px var(--star-color, #FFF), 1543px 1732px var(--star-color, #FFF), 1732px 1876px var(--star-color, #FFF),
-		643px 234px var(--star-color, #FFF), 1234px 643px var(--star-color, #FFF), 1876px 1234px var(--star-color, #FFF), 543px 1543px var(--star-color, #FFF),
-		234px 876px var(--star-color, #FFF), 1643px 1732px var(--star-color, #FFF), 876px 1876px var(--star-color, #FFF), 1543px 234px var(--star-color, #FFF),
-		1732px 1643px var(--star-color, #FFF), 643px 1234px var(--star-color, #FFF), 1234px 876px var(--star-color, #FFF), 1876px 1543px var(--star-color, #FFF),
-		543px 1732px var(--star-color, #FFF), 234px 1876px var(--star-color, #FFF), 1643px 234px var(--star-color, #FFF), 876px 1234px var(--star-color, #FFF),
-		1543px 643px var(--star-color, #FFF), 1732px 876px var(--star-color, #FFF), 643px 1543px var(--star-color, #FFF), 1234px 1732px var(--star-color, #FFF),
-		1876px 1876px var(--star-color, #FFF), 543px 643px var(--star-color, #FFF), 234px 1234px var(--star-color, #FFF), 1643px 876px var(--star-color, #FFF)
-	);
+	box-shadow: var(--small-star-shadow);
 	animation: animStar var(--small-animation-duration, 50s) linear infinite;
 }
 
 #stars:after {
 	content: " ";
 	position: absolute;
-	top: 2000px;
+	top: var(--field-height, 2000px); /* Dynamic field height */
 	width: var(--small-star-size, 1px);
 	height: var(--small-star-size, 1px);
 	background: transparent;
-	box-shadow: var(--small-star-shadow,
-		1847px 1543px var(--star-color, #FFF), 1284px 1732px var(--star-color, #FFF), 783px 234px var(--star-color, #FFF), 1123px 1876px var(--star-color, #FFF),
-		1748px 643px var(--star-color, #FFF), 234px 1543px var(--star-color, #FFF), 1643px 1234px var(--star-color, #FFF), 876px 743px var(--star-color, #FFF),
-		543px 1876px var(--star-color, #FFF), 1234px 234px var(--star-color, #FFF), 876px 1543px var(--star-color, #FFF), 1543px 876px var(--star-color, #FFF),
-		234px 1732px var(--star-color, #FFF), 1876px 543px var(--star-color, #FFF), 643px 1234px var(--star-color, #FFF), 1732px 876px var(--star-color, #FFF),
-		1234px 1643px var(--star-color, #FFF), 876px 234px var(--star-color, #FFF), 543px 1543px var(--star-color, #FFF), 1643px 1732px var(--star-color, #FFF),
-		1876px 1234px var(--star-color, #FFF), 234px 643px var(--star-color, #FFF), 1543px 876px var(--star-color, #FFF), 876px 1876px var(--star-color, #FFF),
-		1732px 543px var(--star-color, #FFF), 643px 1643px var(--star-color, #FFF), 1234px 234px var(--star-color, #FFF), 1876px 1543px var(--star-color, #FFF),
-		543px 1732px var(--star-color, #FFF), 1643px 876px var(--star-color, #FFF), 234px 1234px var(--star-color, #FFF), 876px 643px var(--star-color, #FFF),
-		1543px 1876px var(--star-color, #FFF), 1732px 234px var(--star-color, #FFF), 643px 1543px var(--star-color, #FFF), 1234px 876px var(--star-color, #FFF),
-		1876px 1732px var(--star-color, #FFF), 543px 1643px var(--star-color, #FFF), 234px 234px var(--star-color, #FFF), 1643px 1234px var(--star-color, #FFF),
-		876px 1876px var(--star-color, #FFF), 1543px 643px var(--star-color, #FFF), 1732px 1543px var(--star-color, #FFF), 643px 876px var(--star-color, #FFF),
-		1234px 1732px var(--star-color, #FFF), 1876px 1643px var(--star-color, #FFF), 543px 234px var(--star-color, #FFF), 234px 1234px var(--star-color, #FFF),
-		1643px 876px var(--star-color, #FFF), 876px 1543px var(--star-color, #FFF), 1543px 1732px var(--star-color, #FFF), 1732px 1876px var(--star-color, #FFF),
-		643px 234px var(--star-color, #FFF), 1234px 643px var(--star-color, #FFF), 1876px 1234px var(--star-color, #FFF), 543px 1543px var(--star-color, #FFF),
-		234px 876px var(--star-color, #FFF), 1643px 1732px var(--star-color, #FFF), 876px 1876px var(--star-color, #FFF), 1543px 234px var(--star-color, #FFF),
-		1732px 1643px var(--star-color, #FFF), 643px 1234px var(--star-color, #FFF), 1234px 876px var(--star-color, #FFF), 1876px 1543px var(--star-color, #FFF),
-		543px 1732px var(--star-color, #FFF), 234px 1876px var(--star-color, #FFF), 1643px 234px var(--star-color, #FFF), 876px 1234px var(--star-color, #FFF),
-		1543px 643px var(--star-color, #FFF), 1732px 876px var(--star-color, #FFF), 643px 1543px var(--star-color, #FFF), 1234px 1732px var(--star-color, #FFF),
-		1876px 1876px var(--star-color, #FFF), 543px 643px var(--star-color, #FFF), 234px 1234px var(--star-color, #FFF), 1643px 876px var(--star-color, #FFF)
-	);
+	box-shadow: var(--small-star-shadow);
 }
 
-/* Medium stars layer - now configurable */
+/* Medium stars layer - now fully dynamic */
 #stars2 {
 	width: var(--medium-star-size, 2px);
 	height: var(--medium-star-size, 2px);
 	background: transparent;
-	box-shadow: var(--medium-star-shadow,
-		1323px 987px var(--star-color, #FFF), 654px 1654px var(--star-color, #FFF), 1876px 234px var(--star-color, #FFF), 543px 1234px var(--star-color, #FFF),
-		1234px 876px var(--star-color, #FFF), 876px 1543px var(--star-color, #FFF), 234px 643px var(--star-color, #FFF), 1643px 1876px var(--star-color, #FFF),
-		1732px 543px var(--star-color, #FFF), 643px 1234px var(--star-color, #FFF), 1543px 876px var(--star-color, #FFF), 876px 234px var(--star-color, #FFF),
-		234px 1643px var(--star-color, #FFF), 1876px 1732px var(--star-color, #FFF), 543px 643px var(--star-color, #FFF), 1234px 1543px var(--star-color, #FFF),
-		1643px 876px var(--star-color, #FFF), 876px 1876px var(--star-color, #FFF), 1732px 234px var(--star-color, #FFF), 643px 1234px var(--star-color, #FFF),
-		1543px 1732px var(--star-color, #FFF), 234px 543px var(--star-color, #FFF), 1876px 1643px var(--star-color, #FFF), 543px 876px var(--star-color, #FFF),
-		1234px 234px var(--star-color, #FFF), 1643px 1543px var(--star-color, #FFF), 876px 1732px var(--star-color, #FFF), 1732px 1876px var(--star-color, #FFF),
-		643px 234px var(--star-color, #FFF), 1543px 643px var(--star-color, #FFF), 234px 1234px var(--star-color, #FFF), 1876px 876px var(--star-color, #FFF),
-		543px 1543px var(--star-color, #FFF), 1234px 1732px var(--star-color, #FFF), 1643px 234px var(--star-color, #FFF), 876px 1643px var(--star-color, #FFF),
-		1732px 543px var(--star-color, #FFF), 643px 1876px var(--star-color, #FFF), 1543px 234px var(--star-color, #FFF), 234px 876px var(--star-color, #FFF),
-		1876px 1234px var(--star-color, #FFF), 543px 1732px var(--star-color, #FFF), 1234px 643px var(--star-color, #FFF), 1643px 1543px var(--star-color, #FFF),
-		876px 234px var(--star-color, #FFF), 1732px 1876px var(--star-color, #FFF), 643px 543px var(--star-color, #FFF), 1543px 1234px var(--star-color, #FFF),
-		234px 1732px var(--star-color, #FFF), 1876px 643px var(--star-color, #FFF), 543px 234px var(--star-color, #FFF), 1234px 1876px var(--star-color, #FFF)
-	);
+	box-shadow: var(--medium-star-shadow);
 	animation: animStar var(--medium-animation-duration, 100s) linear infinite;
 }
 
 #stars2:after {
 	content: " ";
 	position: absolute;
-	top: 2000px;
+	top: var(--field-height, 2000px); /* Dynamic field height */
 	width: var(--medium-star-size, 2px);
 	height: var(--medium-star-size, 2px);
 	background: transparent;
-	box-shadow: var(--medium-star-shadow,
-		1323px 987px var(--star-color, #FFF), 654px 1654px var(--star-color, #FFF), 1876px 234px var(--star-color, #FFF), 543px 1234px var(--star-color, #FFF),
-		1234px 876px var(--star-color, #FFF), 876px 1543px var(--star-color, #FFF), 234px 643px var(--star-color, #FFF), 1643px 1876px var(--star-color, #FFF),
-		1732px 543px var(--star-color, #FFF), 643px 1234px var(--star-color, #FFF), 1543px 876px var(--star-color, #FFF), 876px 234px var(--star-color, #FFF),
-		234px 1643px var(--star-color, #FFF), 1876px 1732px var(--star-color, #FFF), 543px 643px var(--star-color, #FFF), 1234px 1543px var(--star-color, #FFF),
-		1643px 876px var(--star-color, #FFF), 876px 1876px var(--star-color, #FFF), 1732px 234px var(--star-color, #FFF), 643px 1234px var(--star-color, #FFF),
-		1543px 1732px var(--star-color, #FFF), 234px 543px var(--star-color, #FFF), 1876px 1643px var(--star-color, #FFF), 543px 876px var(--star-color, #FFF),
-		1234px 234px var(--star-color, #FFF), 1643px 1543px var(--star-color, #FFF), 876px 1732px var(--star-color, #FFF), 1732px 1876px var(--star-color, #FFF),
-		643px 234px var(--star-color, #FFF), 1543px 643px var(--star-color, #FFF), 234px 1234px var(--star-color, #FFF), 1876px 876px var(--star-color, #FFF),
-		543px 1543px var(--star-color, #FFF), 1234px 1732px var(--star-color, #FFF), 1643px 234px var(--star-color, #FFF), 876px 1643px var(--star-color, #FFF),
-		1732px 543px var(--star-color, #FFF), 643px 1876px var(--star-color, #FFF), 1543px 234px var(--star-color, #FFF), 234px 876px var(--star-color, #FFF),
-		1876px 1234px var(--star-color, #FFF), 543px 1732px var(--star-color, #FFF), 1234px 643px var(--star-color, #FFF), 1643px 1543px var(--star-color, #FFF),
-		876px 234px var(--star-color, #FFF), 1732px 1876px var(--star-color, #FFF), 643px 543px var(--star-color, #FFF), 1543px 1234px var(--star-color, #FFF),
-		234px 1732px var(--star-color, #FFF), 1876px 643px var(--star-color, #FFF), 543px 234px var(--star-color, #FFF), 1234px 1876px var(--star-color, #FFF)
-	);
+	box-shadow: var(--medium-star-shadow);
 }
 
-/* Large stars layer - now configurable */
+/* Large stars layer - now fully dynamic */
 #stars3 {
 	width: var(--large-star-size, 3px);
 	height: var(--large-star-size, 3px);
 	background: transparent;
-	box-shadow: var(--large-star-shadow,
-		1543px 876px var(--star-color, #FFF), 876px 1234px var(--star-color, #FFF), 234px 1732px var(--star-color, #FFF), 1876px 543px var(--star-color, #FFF),
-		643px 1643px var(--star-color, #FFF), 1234px 234px var(--star-color, #FFF), 1732px 1876px var(--star-color, #FFF), 543px 643px var(--star-color, #FFF),
-		234px 1543px var(--star-color, #FFF), 1643px 876px var(--star-color, #FFF), 876px 1732px var(--star-color, #FFF), 1543px 234px var(--star-color, #FFF),
-		1876px 1643px var(--star-color, #FFF), 643px 1234px var(--star-color, #FFF), 1234px 543px var(--star-color, #FFF), 1732px 876px var(--star-color, #FFF),
-		543px 1876px var(--star-color, #FFF), 234px 643px var(--star-color, #FFF), 1643px 1543px var(--star-color, #FFF), 876px 234px var(--star-color, #FFF),
-		1543px 1732px var(--star-color, #FFF), 1876px 876px var(--star-color, #FFF), 643px 543px var(--star-color, #FFF), 1234px 1643px var(--star-color, #FFF),
-		1732px 234px var(--star-color, #FFF), 543px 1234px var(--star-color, #FFF), 234px 1876px var(--star-color, #FFF), 1643px 643px var(--star-color, #FFF),
-		876px 1543px var(--star-color, #FFF), 1543px 543px var(--star-color, #FFF), 1876px 1732px var(--star-color, #FFF), 643px 234px var(--star-color, #FFF),
-		1234px 1876px var(--star-color, #FFF), 1732px 643px var(--star-color, #FFF), 543px 1543px var(--star-color, #FFF), 234px 234px var(--star-color, #FFF)
-	);
+	box-shadow: var(--large-star-shadow);
 	animation: animStar var(--large-animation-duration, 150s) linear infinite;
 }
 
 #stars3:after {
 	content: " ";
 	position: absolute;
-	top: 2000px;
+	top: var(--field-height, 2000px); /* Dynamic field height */
 	width: var(--large-star-size, 3px);
 	height: var(--large-star-size, 3px);
 	background: transparent;
-	box-shadow: var(--large-star-shadow,
-		1543px 876px var(--star-color, #FFF), 876px 1234px var(--star-color, #FFF), 234px 1732px var(--star-color, #FFF), 1876px 543px var(--star-color, #FFF),
-		643px 1643px var(--star-color, #FFF), 1234px 234px var(--star-color, #FFF), 1732px 1876px var(--star-color, #FFF), 543px 643px var(--star-color, #FFF),
-		234px 1543px var(--star-color, #FFF), 1643px 876px var(--star-color, #FFF), 876px 1732px var(--star-color, #FFF), 1543px 234px var(--star-color, #FFF),
-		1876px 1643px var(--star-color, #FFF), 643px 1234px var(--star-color, #FFF), 1234px 543px var(--star-color, #FFF), 1732px 876px var(--star-color, #FFF),
-		543px 1876px var(--star-color, #FFF), 234px 643px var(--star-color, #FFF), 1643px 1543px var(--star-color, #FFF), 876px 234px var(--star-color, #FFF),
-		1543px 1732px var(--star-color, #FFF), 1876px 876px var(--star-color, #FFF), 643px 543px var(--star-color, #FFF), 1234px 1643px var(--star-color, #FFF),
-		1732px 234px var(--star-color, #FFF), 543px 1234px var(--star-color, #FFF), 234px 1876px var(--star-color, #FFF), 1643px 643px var(--star-color, #FFF),
-		876px 1543px var(--star-color, #FFF), 1543px 543px var(--star-color, #FFF), 1876px 1732px var(--star-color, #FFF), 643px 234px var(--star-color, #FFF),
-		1234px 1876px var(--star-color, #FFF), 1732px 643px var(--star-color, #FFF), 543px 1543px var(--star-color, #FFF), 234px 234px var(--star-color, #FFF)
-	);
+	box-shadow: var(--large-star-shadow);
 }
 
-/* Star animation - duration now configurable */
+/* Star animation - now dynamic based on field height */
 @keyframes animStar {
 	from {
 		transform: translateY(0px);
 	}
 	to {
-		transform: translateY(-2000px);
+		transform: translateY(calc(-1 * var(--field-height, 2000px)));
 	}
 }
+
+/* Additional performance optimizations */
+#stars, #stars2, #stars3 {
+	will-change: transform;
+	backface-visibility: hidden;
+}
+
+/* Ensure stars work on different screen orientations */
+/* @media (orientation: portrait) {
+	.stars-background {
+	}
+}
+
+@media (orientation: landscape) and (min-width: 1920px) {
+	.stars-background {
+	}
+} */

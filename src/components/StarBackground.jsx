@@ -1,15 +1,38 @@
-// StarBackground.jsx - Configurable animated star background component
-import React from 'react';
+// StarBackground.jsx - Fixed version with dynamic screen coverage
+import React, { useEffect, useState } from 'react';
 import './StarBackground.css';
 
 const StarBackground = ({ 
-  speed = 'fast',           // 'slow', 'normal', 'fast', or custom object
-  color = '#FFFFFF',          // Star color
-  density = 'high',         // 'low', 'normal', 'high'
-  opacity = 1,                // Overall opacity (0-1)
-  size = 'normal'             // 'small', 'normal', 'large'
+  speed = 'fast',
+  color = '#FFFFFF',
+  density = 'high',
+  opacity = 1,
+  size = 'normal'
 }) => {
   
+  // Dynamic viewport dimensions
+  const [viewportSize, setViewportSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight
+  });
+
+  // Update viewport size on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportSize({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Calculate dynamic field size (add buffer for animation)
+  const fieldWidth = Math.max(viewportSize.width * 1.5, 2000);
+  const fieldHeight = Math.max(viewportSize.height * 2, 2000);
+
   // Speed presets (duration in seconds)
   const speedPresets = {
     slow: { small: 80, medium: 120, large: 180 },
@@ -17,7 +40,6 @@ const StarBackground = ({
     fast: { small: 30, medium: 60, large: 90 }
   };
 
-  // Get animation speeds
   const speeds = typeof speed === 'object' ? speed : speedPresets[speed] || speedPresets.normal;
   
   // Size multipliers
@@ -28,20 +50,30 @@ const StarBackground = ({
   };
   const sizeMultiplier = sizeMultipliers[size] || 1;
 
-  // Density configurations
-  const densityConfigs = {
+  // Density configurations (scale with screen size)
+  const baseDensityConfigs = {
     low: { small: 60, medium: 40, large: 30 },
     normal: { small: 140, medium: 80, large: 60 },
     high: { small: 240, medium: 160, large: 100 }
   };
-  const densityConfig = densityConfigs[density] || densityConfigs.normal;
+  
+  // Scale density based on screen area
+  const screenArea = fieldWidth * fieldHeight;
+  const baseArea = 2000 * 2000;
+  const scaleFactor = Math.sqrt(screenArea / baseArea);
+  
+  const densityConfig = {
+    small: Math.floor(baseDensityConfigs[density].small * scaleFactor),
+    medium: Math.floor(baseDensityConfigs[density].medium * scaleFactor),
+    large: Math.floor(baseDensityConfigs[density].large * scaleFactor)
+  };
 
-  // Generate random star positions based on density
+  // Generate random star positions based on dynamic field size
   const generateStars = (count) => {
     const stars = [];
     for (let i = 0; i < count; i++) {
-      const x = Math.floor(Math.random() * 2000);
-      const y = Math.floor(Math.random() * 2000);
+      const x = Math.floor(Math.random() * fieldWidth);
+      const y = Math.floor(Math.random() * fieldHeight);
       stars.push(`${x}px ${y}px ${color}`);
     }
     return stars.join(', ');
@@ -51,6 +83,8 @@ const StarBackground = ({
   const starStyle = {
     '--star-color': color,
     '--star-opacity': opacity,
+    '--field-width': `${fieldWidth}px`,
+    '--field-height': `${fieldHeight}px`,
     '--small-star-size': `${1 * sizeMultiplier}px`,
     '--medium-star-size': `${2 * sizeMultiplier}px`,
     '--large-star-size': `${3 * sizeMultiplier}px`,

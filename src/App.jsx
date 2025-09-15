@@ -1,5 +1,5 @@
 // src/App.jsx
-import InfiniteGallery from './components/InfiniteGallery'
+import InfiniteGallery from './components/Gallery'
 import './App.css'
 
 function App() {
