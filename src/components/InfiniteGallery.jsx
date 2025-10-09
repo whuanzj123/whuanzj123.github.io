@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import StarBackground from './StarBackground';
 import FlippingCard from './FlippingCard';
 import BackgroundMusic from './BackgroundMusic';
-import './Gallery.css';
+import './InfiniteGallery.css';
 
 // Reduced to only 3 animals for the static display
 const animalData = [
