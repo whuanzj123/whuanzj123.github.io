@@ -1,11 +1,14 @@
-// InfiniteGallery.jsx - Main gallery with configurable star background and music
+// InfiniteGallery.jsx - Main gallery with configurable star background
 import React, { useState } from 'react';
 import StarBackground from './StarBackground';
 import FlippingCard from './FlippingCard';
-import BackgroundMusic from './BackgroundMusic';
 import './InfiniteGallery.css';
 
-// Reduced to only 3 animals for the static display
+// Import audio files
+import crownAndLion from '../assets/Anno 1800 Soundtrack - Disc01 - 04 The crown and the lion.mp3';
+// import bellyBeast from '../assets/Anno 1800 Soundtrack - Disc02 - 30 In the belly of the beast.mp3';
+
+// Animal data with associated music
 const animalData = [
   {
     common: 'Lion', 
@@ -16,6 +19,11 @@ const animalData = [
       text: 'lion couple kissing on a brown rock', 
       pos: '47% 35%', 
       by: 'Clément Roy'
+    },
+    music: {
+      src: crownAndLion,
+      title: 'The Crown and the Lion',
+      artist: 'Anno 1800 Soundtrack'
     }
   }, 
   {
@@ -27,6 +35,11 @@ const animalData = [
       text: 'giant panda hanging from a tree branch', 
       pos: '47%', 
       by: 'Jiachen Lin'
+    },
+    music: {
+      src: crownAndLion, // Using same music for now
+      title: 'The Crown and the Lion',
+      artist: 'Anno 1800 Soundtrack'
     }
   }, 
   {
@@ -38,6 +51,11 @@ const animalData = [
       text: 'king penguin with a fluffy brown chick on grey rocks', 
       pos: '35%', 
       by: 'Martin Wettstein'
+    },
+    music: {
+      src: crownAndLion, // Using same music for now
+      title: 'The Crown and the Lion',
+      artist: 'Anno 1800 Soundtrack'
     }
   }
 ];
@@ -94,9 +112,6 @@ const InfiniteGallery = () => {
       {/* Configurable Star Background */}
       <StarBackground {...starPresets[currentPreset]} />
 
-      {/* Background Music Player */}
-      <BackgroundMusic />
-
       {/* Gallery Content */}
       <div className="gallery-content">
         <header className="gallery-header">
@@ -127,6 +142,9 @@ const InfiniteGallery = () => {
                 animal={animal}
                 index={index}
                 baseUrl={base}
+                musicSrc={animal.music.src}
+                musicTitle={animal.music.title}
+                musicArtist={animal.music.artist}
               />
             ))}
           </section>

@@ -1,8 +1,9 @@
-// FlippingCard.jsx - Reusable flipping card component
+// FlippingCard.jsx - Reusable flipping card component with music player
 import React from 'react';
+import CardMusicPlayer from './CardMusicPlayer';
 import './FlippingCard.css';
 
-const FlippingCard = ({ animal, index, baseUrl }) => {
+const FlippingCard = ({ animal, index, baseUrl, musicSrc, musicTitle, musicArtist }) => {
   const img = animal.photo;
   const pos = img.pos;
   const url = `https://images.${baseUrl}-${img.code}?h=900`;
@@ -38,6 +39,13 @@ const FlippingCard = ({ animal, index, baseUrl }) => {
             <em>{animal.binomial}</em>
             <p className="description">{img.text}</p>
           </header>
+          
+          {/* Music player on the back of the card */}
+          <CardMusicPlayer 
+            audioSrc={musicSrc}
+            title={musicTitle}
+            artist={musicArtist}
+          />
         </div>
       </div>
     </article>
