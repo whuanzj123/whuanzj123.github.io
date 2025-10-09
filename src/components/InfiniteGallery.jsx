@@ -100,9 +100,7 @@ const InfiniteGallery = () => {
       {/* Gallery Content */}
       <div className="gallery-content">
         <header className="gallery-header">
-          <h1>Animal Gallery</h1>
-          <strong>Hover or tap cards to flip them</strong>
-          <em>Mobile-friendly flipping cards with configurable parallax stars and epic soundtrack</em>
+          <h1>Infinite Gallery</h1>
           
           {/* Star Background Controls */}
           <div className="star-controls">
