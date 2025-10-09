@@ -3,7 +3,7 @@ import React from 'react';
 import CardMusicPlayer from './CardMusicPlayer';
 import './FlippingCard.css';
 
-const FlippingCard = ({ animal, index, baseUrl, musicSrc, musicTitle, musicArtist }) => {
+const FlippingCard = ({ animal, index, baseUrl, musicSrc, musicTitle, musicArtist, theme }) => {
   const img = animal.photo;
   const pos = img.pos;
   const url = `https://images.${baseUrl}-${img.code}?h=900`;
@@ -45,6 +45,8 @@ const FlippingCard = ({ animal, index, baseUrl, musicSrc, musicTitle, musicArtis
             audioSrc={musicSrc}
             title={musicTitle}
             artist={musicArtist}
+            theme={theme}
+            cardId={`card-${index}`}
           />
         </div>
       </div>

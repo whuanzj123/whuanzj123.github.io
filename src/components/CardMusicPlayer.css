@@ -1,4 +1,4 @@
-/* CardMusicPlayer.css - Styles for card-based music player */
+/* CardMusicPlayer.css - Styles for card-based music player with theme support */
 
 .card-music-player {
   display: flex;
@@ -7,10 +7,18 @@
   padding: 1rem;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 10px;
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   margin-top: auto;
   width: 90%;
   max-width: 400px;
+  
+  /* Default theme colors (can be overridden by inline styles) */
+  --theme-primary: #f48c06;
+  --theme-secondary: #dc3055;
+  --theme-gradient-start: #f48c06;
+  --theme-gradient-end: #dc3055;
 }
 
 .card-play-button {
@@ -18,8 +26,8 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 2px solid #f48c06 !important;
-  background: linear-gradient(135deg, #f48c06 0%, #dc3055 100%) !important;
+  border: 2px solid var(--theme-primary) !important;
+  background: linear-gradient(135deg, var(--theme-gradient-start) 0%, var(--theme-gradient-end) 100%) !important;
   color: white;
   cursor: pointer;
   display: flex;
@@ -35,6 +43,7 @@
 .card-play-button:hover {
   transform: scale(1.1);
   box-shadow: 0 6px 20px rgba(244, 140, 6, 0.6);
+  border-color: var(--theme-primary) !important; /* Prevent global button hover from changing border */
 }
 
 .card-play-button:active {
@@ -42,7 +51,7 @@
 }
 
 .card-play-button.playing {
-  background: linear-gradient(135deg, #dc3055 0%, #f48c06 100%);
+  background: linear-gradient(135deg, var(--theme-gradient-end) 0%, var(--theme-gradient-start) 100%) !important;
   animation: pulse 2s ease-in-out infinite;
 }
 
@@ -66,7 +75,7 @@
 .card-track-title {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #f48c06;
+  color: var(--theme-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -82,18 +91,48 @@
 
 .card-progress-bar {
   width: 100%;
-  height: 4px;
+  height: 6px;
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 2px;
+  border-radius: 3px;
   overflow: hidden;
   cursor: pointer;
+  position: relative;
+  transition: height 0.2s ease;
+}
+
+.card-progress-bar:hover {
+  height: 8px;
+}
+
+.card-progress-bar:active {
+  height: 8px;
 }
 
 .card-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #f48c06 0%, #dc3055 100%);
-  border-radius: 2px;
+  background: linear-gradient(90deg, var(--theme-gradient-start) 0%, var(--theme-gradient-end) 100%);
+  border-radius: 3px;
   transition: width 0.1s linear;
+  position: relative;
+}
+
+.card-progress-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.card-progress-bar:hover .card-progress-fill::after {
+  opacity: 1;
 }
 
 .card-time-display {
@@ -116,8 +155,8 @@
   }
 
   .card-play-button svg {
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
   }
 
   .card-track-title {
@@ -138,5 +177,10 @@
   .card-play-button {
     width: 36px;
     height: 36px;
+  }
+  
+  .card-play-button svg {
+    width: 24px;
+    height: 24px;
   }
 }

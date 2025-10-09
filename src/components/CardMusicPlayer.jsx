@@ -1,8 +1,8 @@
-// CardMusicPlayer.jsx - Compact music player for individual cards
+// CardMusicPlayer.jsx - Compact music player for individual cards with theme support
 import React, { useState, useRef, useEffect } from 'react';
 import './CardMusicPlayer.css';
 
-const CardMusicPlayer = ({ audioSrc, title, artist }) => {
+const CardMusicPlayer = ({ audioSrc, title, artist, theme }) => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -15,15 +15,23 @@ const CardMusicPlayer = ({ audioSrc, title, artist }) => {
     const updateTime = () => setCurrentTime(audio.currentTime);
     const updateDuration = () => setDuration(audio.duration);
     const handleEnded = () => setIsPlaying(false);
+    
+    // Handle when audio is paused (including by other cards)
+    const handlePause = () => setIsPlaying(false);
+    const handlePlay = () => setIsPlaying(true);
 
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('loadedmetadata', updateDuration);
     audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('pause', handlePause);
+    audio.addEventListener('play', handlePlay);
 
     return () => {
       audio.removeEventListener('timeupdate', updateTime);
       audio.removeEventListener('loadedmetadata', updateDuration);
       audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('play', handlePlay);
     };
   }, []);
 
@@ -37,11 +45,27 @@ const CardMusicPlayer = ({ audioSrc, title, artist }) => {
     } else {
       // Pause all other audio elements on the page
       document.querySelectorAll('audio').forEach(a => {
-        if (a !== audio) a.pause();
+        if (a !== audio) {
+          a.pause();
+        }
       });
       audio.play().catch(console.error);
     }
-    setIsPlaying(!isPlaying);
+  };
+
+  const handleProgressClick = (e) => {
+    e.stopPropagation(); // Prevent card flip
+    const audio = audioRef.current;
+    if (!audio || !duration) return;
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const width = rect.width;
+    const percentage = clickX / width;
+    const newTime = percentage * duration;
+    
+    audio.currentTime = newTime;
+    setCurrentTime(newTime);
   };
 
   const formatTime = (time) => {
@@ -53,8 +77,16 @@ const CardMusicPlayer = ({ audioSrc, title, artist }) => {
 
   const progressPercentage = duration ? (currentTime / duration) * 100 : 0;
 
+  // Create CSS custom properties for the theme
+  const themeStyle = {
+    '--theme-primary': theme.primary,
+    '--theme-secondary': theme.secondary,
+    '--theme-gradient-start': theme.gradientStart,
+    '--theme-gradient-end': theme.gradientEnd,
+  };
+
   return (
-    <div className="card-music-player">
+    <div className="card-music-player" style={themeStyle}>
       <audio ref={audioRef} src={audioSrc} preload="metadata" />
       
       <button 
@@ -77,7 +109,11 @@ const CardMusicPlayer = ({ audioSrc, title, artist }) => {
         <div className="card-track-title">{title}</div>
         <div className="card-track-artist">{artist}</div>
         
-        <div className="card-progress-bar">
+        <div 
+          className="card-progress-bar"
+          onClick={handleProgressClick}
+          title="Click to seek"
+        >
           <div 
             className="card-progress-fill"
             style={{ width: `${progressPercentage}%` }}

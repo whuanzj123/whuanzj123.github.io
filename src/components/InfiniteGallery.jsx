@@ -1,4 +1,4 @@
-// InfiniteGallery.jsx - Main gallery with configurable star background
+// InfiniteGallery.jsx - Main gallery with configurable star background and themed cards
 import React, { useState } from 'react';
 import StarBackground from './StarBackground';
 import FlippingCard from './FlippingCard';
@@ -8,7 +8,29 @@ import './InfiniteGallery.css';
 import crownAndLion from '../assets/Anno 1800 Soundtrack - Disc01 - 04 The crown and the lion.mp3';
 // import bellyBeast from '../assets/Anno 1800 Soundtrack - Disc02 - 30 In the belly of the beast.mp3';
 
-// Animal data with associated music
+// Define color themes for each card
+const cardThemes = {
+  lion: {
+    primary: '#f48c06',      // Warm orange
+    secondary: '#dc3055',    // Deep red
+    gradientStart: '#f48c06',
+    gradientEnd: '#dc3055',
+  },
+  panda: {
+    primary: '#06f48c',      // Mint green
+    secondary: '#3055dc',    // Royal blue
+    gradientStart: '#06f48c',
+    gradientEnd: '#3055dc',
+  },
+  penguin: {
+    primary: '#8c06f4',      // Purple
+    secondary: '#dc3055',    // Pink
+    gradientStart: '#8c06f4',
+    gradientEnd: '#f406dc',
+  }
+};
+
+// Animal data with associated music and themes
 const animalData = [
   {
     common: 'Lion', 
@@ -24,7 +46,8 @@ const animalData = [
       src: crownAndLion,
       title: 'The Crown and the Lion',
       artist: 'Anno 1800 Soundtrack'
-    }
+    },
+    theme: cardThemes.lion
   }, 
   {
     common: 'Giant panda', 
@@ -40,7 +63,8 @@ const animalData = [
       src: crownAndLion, // Using same music for now
       title: 'The Crown and the Lion',
       artist: 'Anno 1800 Soundtrack'
-    }
+    },
+    theme: cardThemes.panda
   }, 
   {
     common: 'King penguin', 
@@ -56,7 +80,8 @@ const animalData = [
       src: crownAndLion, // Using same music for now
       title: 'The Crown and the Lion',
       artist: 'Anno 1800 Soundtrack'
-    }
+    },
+    theme: cardThemes.penguin
   }
 ];
 
@@ -145,6 +170,7 @@ const InfiniteGallery = () => {
                 musicSrc={animal.music.src}
                 musicTitle={animal.music.title}
                 musicArtist={animal.music.artist}
+                theme={animal.theme}
               />
             ))}
           </section>
